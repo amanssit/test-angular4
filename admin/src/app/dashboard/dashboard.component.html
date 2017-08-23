@@ -1,0 +1,29 @@
+<app-header></app-header>
+<app-sidemenu></app-sidemenu>
+<section class="main-container">
+  <app-page-header></app-page-header>
+  <div class="row">
+    <div class="col-md-6">
+      <p-panel header="Sales Report">
+        <p-chart type="bar" [data]="data"></p-chart>
+      </p-panel>
+    </div>
+    <div class="col-md-6">
+      <p-panel header="Sales Report">
+        <p-chart type="line" [data]="data"></p-chart>
+      </p-panel>
+    </div>
+    <div class="col-md-6">
+      <p-panel header="Sales Report">
+        <p-chart type="pie" [data]="data"></p-chart>
+      </p-panel>
+    </div>
+    <div class="col-md-6">
+      <p-panel header="Sales Report">
+        <p-chart type="polarArea" [data]="data"></p-chart>
+      </p-panel>
+    </div>
+  </div>
+
+
+</section>

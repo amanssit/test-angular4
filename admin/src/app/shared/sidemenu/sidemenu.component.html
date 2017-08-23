@@ -1,0 +1,39 @@
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+  <ul class="list-group">
+    <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+      <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'dashboard'}}
+    </a>
+    <a [routerLink]="['/user']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+      <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;{{ 'Users'}}
+    </a>
+    <a [routerLink]="['/calendar']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+      <i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Calendar'}}
+    </a>
+     <a [routerLink]="['/product']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+      <i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Products'}}
+    </a>
+    <a [routerLink]="['/forms']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+      <i class="fa fa-fw fa-edit"></i>&nbsp;{{ 'Reports'}}
+    </a>
+
+    <div class="nested-menu">
+      <a class="list-group-item" (click)="addExpandClass('pages')">
+        <span><i class="fa fa-plus"></i>&nbsp; {{ 'Reports'}}</span>
+      </a>
+      <li class="nested" [class.expand]="showMenu === 'pages'">
+        <ul class="submenu">
+          <li>
+            <a href="javascript:void(0)"><span>{{ 'Sales Report'}}</span></a>
+          </li>
+          <li>
+            <a href="javascript:void(0)"><span>{{ 'User Report'}}</span></a>
+          </li>
+          <li>
+            <a href="javascript:void(0)"><span>{{ 'Message Report'}}</span></a>
+          </li>
+        </ul>
+      </li>
+    </div>
+
+  </ul>
+</nav>

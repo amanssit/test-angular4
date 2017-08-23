@@ -1,18 +1,12 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/admin/dist
-/admin/tmp
-/admin/out-tsc
-
-/website/dist
-/website/tmp
-/website/out-tsc
+/dist
+/tmp
+/out-tsc
 
 # dependencies
-/api/node_modules
-/admin/node_modules
-/website/node_modules
+/node_modules
 
 # IDEs and editors
 /.idea

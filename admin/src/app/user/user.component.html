@@ -1,0 +1,111 @@
+<app-header></app-header>
+<app-sidemenu></app-sidemenu>
+<section class="main-container">
+  <app-page-header></app-page-header>
+
+  <p-growl [(value)]="msgs"></p-growl>
+  <p-confirmDialog></p-confirmDialog>
+
+  <div class="row">
+    <p-panel class="ui-md-12" header="User Managment">
+      <div class="row">
+        <form [formGroup]="userForm" (submit)="addUser()">
+
+
+          <div class="ui-g ui-fluid">
+
+            <div class="ui-g-12 ui-md-2">
+              <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                <input name="firstname" type="text" pInputText placeholder="First Name" formControlName="first_name">
+              </div>
+            </div>
+            <div class="ui-g-12 ui-md-2">
+              <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                <input name="lastname" type="text" pInputText placeholder="Last Name" formControlName="last_name">
+              </div>
+            </div>
+            <div class="ui-g-12 ui-md-2">
+              <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="fa fa-envelope"></i></span>
+                <input name="email" type="text" pInputText placeholder="Email" formControlName="email">
+              </div>
+            </div>
+            <div class="ui-g-12 ui-md-2">
+              <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
+                <input name="password" type="password" pInputText placeholder="Password" formControlName="password">
+              </div>
+            </div>
+            <div class="ui-g-12 ui-md-2">
+              <p-dropdown name="role" [options]="roles" formControlName="role"></p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-md-2">
+              <button [disabled]="!userForm.valid" class="ui-button-success ui-button-icon-left" type="submit" pButton
+                      icon="fa-plus"></button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+
+      <div class="row">
+
+        <div class="ui-widget-header ui-md-12" style="padding:4px 10px;border-bottom: 0 none">
+          <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+          <input #gb type="text" pInputText size="50" placeholder="Global Filter">
+        </div>
+
+        <p-dataTable [value]="users" sortMode="multiple" [globalFilter]="gb" #dt>
+          <p-column field="first_name" header="First Name" [sortable]="true"></p-column>
+          <p-column field="last_name" header="Last Name" [sortable]="true"></p-column>
+          <p-column field="email" header="Email Address" [sortable]="true"></p-column>
+          <p-column field="role" header="Role" [sortable]="true"></p-column>
+          <p-column styleClass="col-button">
+            <ng-template pTemplate="header">
+              Action
+            </ng-template>
+            <ng-template let-user="rowData" pTemplate="body">
+              <button class="ui-button-danger" (click)="delete(user._id)" type="button" pButton
+                      icon="fa-trash-o"></button>
+              <button class="ui-button-warning" (click)="edit(user)" type="button" pButton icon="fa-pencil-square-o"></button>
+            </ng-template>
+          </p-column>
+        </p-dataTable>
+        <p-paginator rows="5" totalRecords="{{records}}" pageLinkSize="3" (onPageChange)="paginate($event)"
+                     [rowsPerPageOptions]="[5,10,20,30]"></p-paginator>
+      </div>
+
+    </p-panel>
+  </div>
+
+  <!--------------------------Edit for here--------------------------------->
+
+  <p-dialog header="Edit User Details" [(visible)]="displayEdit" [responsive]="true" showEffect="fade" [modal]="true">
+    <form [formGroup]="editForm" (submit)="update()">
+      <div class="ui-grid ui-grid-responsive ui-fluid">
+        <div class="ui-grid-col-8"><input type="hidden" id="_id" name="id" formControlName="_id"/></div>
+        <div class="ui-grid-row form-group">
+          <div class="ui-grid-col-4"><label for="firstname">First Name</label></div>
+          <div class="ui-grid-col-8"><input pInputText id="firstname" name="firstname" formControlName="first_name"/></div>
+        </div>
+        <div class="ui-grid-row form-group">
+          <div class="ui-grid-col-4"><label for="lastname">Last Name</label></div>
+          <div class="ui-grid-col-8"><input pInputText id="lastname" name="lastname" formControlName="last_name"/></div>
+        </div>
+        <div class="ui-grid-row form-group">
+          <div class="ui-grid-col-4"><label for="email">Email</label></div>
+          <div class="ui-grid-col-8"><input pInputText id="email" name="email" formControlName="email"/></div>
+        </div>
+      </div>
+      <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+          <button [disabled]="!editForm.valid" type="submit" pButton icon="fa-check" label="Update User"></button>
+        </div>
+      </p-footer>
+    </form>
+  </p-dialog>
+
+</section>
